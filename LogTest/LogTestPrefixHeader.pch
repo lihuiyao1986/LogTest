@@ -1,0 +1,31 @@
+//
+//  LogTestPrefixHeader.pch
+//  LogTest
+//
+//  Created by jk on 2017/4/26.
+//  Copyright © 2017年 Goldcard. All rights reserved.
+//
+
+
+
+#ifndef LogTestPrefixHeader_pch
+#define LogTestPrefixHeader_pch
+
+//定义并导入CoCoaLumberJack框架
+#define LOG_LEVEL_DEF ddLogLevel
+#import <CocoaLumberjack.h>
+
+//通过DEBUG模式设置全局日志等级，DEBUG时为Verbose，所有日志信息都可以打印，否则Error，只打印
+#ifdef DEBUG
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+#else
+static const DDLogLevel ddLogLevel = DDLogLevelError;
+#endif
+
+#ifdef DEBUG
+#define DLog(format, ...) DDLogError((@"[文件名:%s]" "[函数名:%s]" "[行号:%d]" format), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#define DLog(...);
+#endif
+
+#endif /* LogTestPrefixHeader_pch */
